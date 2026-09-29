@@ -21,8 +21,20 @@ export default function Page() {
       <section className="pb-6">
         <h2 className="text-primary text-3xl font-semibold">My drawings</h2>
         <div className="mt-4 flex flex-wrap gap-6">
-          <Image src="/kiyomi.png" alt="Kiyomi" width={300} height={500} />
-          <Image src={Zeiko} alt="Zeiko" width={300} height={500} />
+          <Image
+            src="/images/kiyomi.png"
+            alt="Kiyomi"
+            width={300}
+            height={400}
+            sizes="(max-width: 768px) 100vw, 300px"
+            className="h-auto w-75 rounded-lg object-cover"
+          />
+          <Image
+            src={Zeiko}
+            alt="Zeiko"
+            sizes="(max-width: 768px) 100vw, 300px"
+            className="h-auto w-75 rounded-lg object-cover"
+          />
         </div>
       </section>
 
