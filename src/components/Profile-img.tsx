@@ -1,10 +1,14 @@
-import Image from "next/image";
+"use client";
+
+import { useLanguage } from "./Language";
 
 export default function Profileimg() {
+  const { t } = useLanguage();
+
   return (
-        <div>
-            <h2>Hei</h2>
-            <p>Mitt navn er Marte</p>
-        </div>
-  )
+    <div>
+      <h2>{t("greeting")}</h2>
+      <p>{t("myName")}</p>
+    </div>
+  );
 }
