@@ -68,20 +68,33 @@ const translations: Record<Locale, TranslationMap> = {
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
 
+function getStoredLocale(): Locale {
+  if (typeof window === "undefined") {
+    return "en";
+  }
+
+  const storedLocale = window.localStorage.getItem("portfolio-locale");
+  return storedLocale === "en" || storedLocale === "no" ? storedLocale : "en";
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("en");
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const storedLocale = window.localStorage.getItem("portfolio-locale");
-    if (storedLocale === "en" || storedLocale === "no") {
-      setLocaleState(storedLocale);
-    }
+    const storedLocale = getStoredLocale();
+    setLocaleState(storedLocale);
+    setIsReady(true);
   }, []);
 
   useEffect(() => {
+    if (!isReady) {
+      return;
+    }
+
     document.documentElement.lang = locale;
     window.localStorage.setItem("portfolio-locale", locale);
-  }, [locale]);
+  }, [isReady, locale]);
 
   const value = useMemo<LanguageContextValue>(
     () => ({
@@ -91,6 +104,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }),
     [locale],
   );
+
+  if (!isReady) {
+    return null;
+  }
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
