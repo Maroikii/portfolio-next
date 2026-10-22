@@ -11,12 +11,24 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --color-text: #5868cb;
-    --color-background: #322b2b;
+    --color-background: #353435;
     --color-primary: #f497b7;
     --color-secondary: #87b0ee;
     --color-accent: #65e9bb;
   }
+
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-text: #3443a8;
+    --color-background: #dad1d1;
+    --color-primary: #6a0b2c;
+    --color-secondary: #113b78;
+    --color-accent: #169c6d;
+  }
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-text);
