@@ -37,6 +37,8 @@ const translations: Record<Locale, TranslationMap> = {
     contactTitle: "Contact Me",
     contactText:
       "If you would like to get in touch, please reach out via email or social media.",
+    email: "Email: example@example.com",
+    instagram: "Instagram: @example",
     epleTitle: "Apple page",
     epleText: "This is the Apple page. You can add more content about Apple here.",
     english: "English",
