@@ -9,7 +9,7 @@ export default function Page() {
   const { t } = useLanguage();
 
   return (
-    <main className="bg-background px-6 text-text">
+    <main className="bg-background text-text">
       <header className="pb-4">
         <h1 className="text-2xl text-primary lg:text-6xl xl:text-8xl">{t("welcomeTitle")}</h1>
         <p className="mt-4 max-w-2xl text-lg">{t("welcomeText")}</p>

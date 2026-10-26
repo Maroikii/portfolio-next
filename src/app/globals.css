@@ -1,35 +1,31 @@
 @import "tailwindcss";
 
+/* 241, 218, 196, f1dac4
+166, 156, 172, a69cac
+71, 73, 115, 474973
+22, 27, 51, 161b33
+13, 12, 29 0d0c1d */
+
 @theme {
-  --color-text: #3443a8;
-  --color-background: #322b2b;
-  --color-primary: #6a0b2c;
-  --color-secondary: #113b78;
-  --color-accent: #169c6d;
+  --color-text: #161b33;
+  --color-background: #f1dac4;
+  --color-primary: #474973;
+  --color-secondary: #a69cac;
+  --color-dark: #0d0c1d;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: #5868cb;
-    --color-background: #353435;
-    --color-primary: #f497b7;
-    --color-secondary: #87b0ee;
-    --color-accent: #65e9bb;
-  }
-
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-text: #3443a8;
-    --color-background: #dad1d1;
-    --color-primary: #6a0b2c;
-    --color-secondary: #113b78;
-    --color-accent: #169c6d;
-  }
-}
-
-body {
-  background-color: var(--color-background);
-  color: var(--color-text);
-}
+  /* @media (prefers-color-scheme: dark) {
+    :root {
+      --color-text: rgb(71, 73, 115);
+      --color-background: rgb(241, 218, 196);
+      --color-primary: #f497b7;
+      --color-secondary: #87b0ee;
+      --color-accent: #65e9bb;
+    }
+  } */
+      
+      body {
+        background-color: var(--color-background);
+        color: var(--color-text);
+      }
+      
