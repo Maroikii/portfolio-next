@@ -17,15 +17,17 @@ type LanguageContextValue = {
   locale: Locale;
   setLocale: (nextLocale: Locale) => void;
   t: (key: string) => string;
+  github: string;
 };
 
 const translations: Record<Locale, TranslationMap> = {
   en: {
+    github: "My GitHub",
     navTitle: "Portfolio",
     home: "Home",
     about: "About",
     contact: "Contact",
-    footer: "Portfolio footer",
+    footer: "Maroikii",
     welcomeTitle: "Welcome to My Portfolio",
     welcomeText:
       "Hello, welcome to my portfolio website! Here you will find information about my projects, skills, and experience.",
@@ -45,11 +47,12 @@ const translations: Record<Locale, TranslationMap> = {
     norwegian: "Norwegian",
   },
   no: {
+    github: "Min GitHub",
     navTitle: "Portefølje",
     home: "Hjem",
     about: "Om meg",
     contact: "Kontakt",
-    footer: "Portefølje footer",
+    footer: "Maroikii",
     welcomeTitle: "Velkommen til min portefølje",
     welcomeText:
       "Hei, velkommen til min portefølje! Her finner du informasjon om mine prosjekter, ferdigheter og erfaring.",
@@ -103,6 +106,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       locale,
       setLocale: (nextLocale: Locale) => setLocaleState(nextLocale),
       t: (key: string) => translations[locale][key] ?? translations.en[key] ?? key,
+      github: translations[locale][""] ?? translations.en[""],
     }),
     [locale],
   );
