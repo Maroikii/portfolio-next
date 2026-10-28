@@ -21,3 +21,4 @@ export default function Galleri() {
     </main>
   )
 }
+// blal alakf afjsldfj
