@@ -22,22 +22,7 @@ export default function Page() {
 
       <section className="pb-6">
         <h2 className="text-3xl font-semibold text-primary">{t("myDrawings")}</h2>
-        <div className="mt-4 flex flex-wrap gap-6">
-          {/* <Image
-            src="/images/kiyomi.png"
-            alt="Kiyomi"
-            width={300}
-            height={400}
-            sizes="(max-width: 800px) 100vw, 300px"
-            className="h-auto w-85 rounded-lg object-cover" */}
-          {/* /> */}
-          {/* <Image
-            src={Zeiko}
-            alt="Zeiko"
-            sizes="(max-width: 800px) 100vw, 300px"
-            className="h-auto w-75 rounded-lg object-cover"
-          /> */}
-        </div>
+        <div className="mt-4 flex flex-wrap gap-6"></div>
       </section>
 
       <div className="pb-6">
