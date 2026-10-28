@@ -1,7 +1,6 @@
 "use client";
 
 import { useLanguage } from "../../components/Language";
-import ContactForm from "../../components/Contact-form";
 
 export default function ContactPage() {
   const { t } = useLanguage();
@@ -16,7 +15,6 @@ export default function ContactPage() {
         <p className="mt-2">{t("email")}</p>
         <p className="mt-2">{t("instagram")}</p>
       </header>
-      <ContactForm />
     </main>
   );
 }
