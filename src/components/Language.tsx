@@ -44,7 +44,9 @@ const translations: Record<Locale, TranslationMap> = {
     epleTitle: "Apple page",
     epleText: "This is the Apple page. You can add more content about Apple here.",
     english: "English",
-    norwegian: "Norwegian",
+    norwegian: "Norsk",
+    codeProjects: "Coding Projects",
+    gallery: "Gallery",
   },
   no: {
     github: "Min GitHub",
@@ -66,7 +68,9 @@ const translations: Record<Locale, TranslationMap> = {
       "Hvis du vil komme i kontakt, kan du sende en e-post eller kontakte meg via sosiale medier.",
     epleTitle: "Eple-side",
     epleText: "Dette er eplesiden. Her kan du legge til mer innhold om eple.",
-    english: "Engelsk",
+    codeProjects: "Kode-prosjekter",
+    english: "English",
+    gallery: "Galleri",
     norwegian: "Norsk",
   },
 };

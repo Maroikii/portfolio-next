@@ -15,6 +15,8 @@ export default function Navbar() {
         <li className="button"><a href="/">{t("home")}</a></li>
         <li className="button"><a href="/about">{t("about")}</a></li>
         <li className="button"><a href="/contact">{t("contact")}</a></li>
+        <li className="button"><a href="/prosjekter/kode-prosjekter">{t("codeProjects")}</a></li>
+        <li className="button"><a href="/prosjekter/galleri">{t("myDrawings")}</a></li>
       </ul>
 
       <LanguageToggle />
