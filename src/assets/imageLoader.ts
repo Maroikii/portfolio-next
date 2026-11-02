@@ -13,6 +13,7 @@
 // console.log(imageMap);
 
 // TEST
+// TEST2
 
 import aoki from '@/assets/images/aoki.png';
 import kikou from '@/assets/images/kikou.png';
