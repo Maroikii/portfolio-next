@@ -10,6 +10,7 @@ export default function AboutPage() {
       <div className="px-6 py-4">
         <h1 className="text-6xl font-bold text-primary">{t("aboutMe")}</h1>
         <p className="mt-4 max-w-2xl text-lg">{t("aboutMeText")}</p>
+        <p className="mt-4 max-w-2xl text-lg">{t("aboutMeAdditionalText")}</p>
       </div>
     </main>
   );
