@@ -12,6 +12,8 @@
 
 // console.log(imageMap);
 
+// TEST
+
 import aoki from '@/assets/images/aoki.png';
 import kikou from '@/assets/images/kikou.png';
 import kirin from '@/assets/images/kirin.jpg';
