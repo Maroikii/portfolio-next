@@ -47,7 +47,7 @@ export default async function GalleryPage() {
     )
 
     return (
-        <main>
+        <main className="mx-auto max-w-3xl">
             <h1></h1>
             
             {folders.map(async (folder) => {
@@ -62,12 +62,13 @@ export default async function GalleryPage() {
                     <section key={folder.folderid}>
                         <h2>{folder.name}</h2>
                         <p>{descriptions[folder.name]}</p>
-                        <div>
+                        <div className="grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                             {images.map((img) => (
                                 <img 
                                     key={img.deviationid} 
-                                    src={img.content ?.src} 
+                                    src={img.content?.src} 
                                     alt={img.title}
+                                    className="aspect-[4/3] w-full rounded-lg object-contain"
                                 />
                             ))}
                         </div>
