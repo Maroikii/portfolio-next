@@ -47,7 +47,7 @@ export default async function GalleryPage() {
     )
 
     return (
-        <main>
+        <main className="mb-5 px-4 sm:px-5 md:mx-auto md:max-w-6xl">
             <h1></h1>
             
             {folders.map(async (folder) => {
@@ -59,15 +59,16 @@ export default async function GalleryPage() {
                     (img: Deviation) => img.content?.src,
                 );
                 return (
-                    <section key={folder.folderid}>
-                        <h2>{folder.name}</h2>
+                    <section className="my-5 rounded-2xl bg-secondary px-4 pb-5 shadow-md sm:px-5 md:px-5" key={folder.folderid}>
+                        <h2 className="my-5 pt-6 text-center text-2xl font-bold">{folder.name}</h2>
                         <p>{descriptions[folder.name]}</p>
-                        <div>
+                        <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
                             {images.map((img) => (
                                 <img 
                                     key={img.deviationid} 
-                                    src={img.content ?.src} 
+                                    src={img.content?.src} 
                                     alt={img.title}
+                                    className="aspect-[4/3] w-full rounded-lg object-contain"
                                 />
                             ))}
                         </div>

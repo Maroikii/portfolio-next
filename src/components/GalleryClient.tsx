@@ -8,7 +8,7 @@ export default function GalleryTitle() {
   return (
     <>
       <h1>{t("galleryTitle")}</h1>
-      <p>{t("galleryDescription")}</p>
+      
     </>
 
   )
