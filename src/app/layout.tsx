@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col items-center justify-center">
+      <body className="flex min-h-full flex-col">
         <LanguageProvider>
           <Navbar />
           <div className="flex-1">{children}</div>
