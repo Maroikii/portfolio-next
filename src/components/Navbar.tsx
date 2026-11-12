@@ -32,27 +32,28 @@ export default function Navbar() {
          lg:static lg:flex lg:w-auto lg:flex-row lg:items-center lg:gap-4 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none
          mr-1`}
       >
-        <li className="hover:underline hover:text-blue-500">
+        {/* when page open, the text is bold and darker */}
+        <li className="hover:underline hover:text-color-dark">  
           <Link href="/" onClick={handleLinkClick}>
             {t("home")}
           </Link>
         </li>
-        <li className="hover:underline hover:text-blue-500">
+        <li className="hover:underline hover:text-color-dark">
           <Link href="/about" onClick={handleLinkClick}>
             {t("about")}
           </Link>
         </li>
-        <li className="hover:underline hover:text-blue-500">
+        <li className="hover:underline hover:text-color-dark">
           <Link href="/contact" onClick={handleLinkClick}>
             {t("contact")}
           </Link>
         </li>
-        <li className="hover:underline hover:text-blue-500">
+        <li className="hover:underline hover:text-color-dark">
           <Link href="/prosjekter/kode-prosjekter" onClick={handleLinkClick}>
             {t("codeProjects")}
           </Link>
         </li>
-        <li className="hover:underline hover:text-blue-500">
+        <li className="hover:underline hover:text-color-dark">
           <Link href="/prosjekter/galleri" onClick={handleLinkClick}>
             {t("gallery")}
           </Link>
