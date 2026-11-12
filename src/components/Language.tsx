@@ -49,6 +49,8 @@ const translations: Record<Locale, TranslationMap> = {
     codeProjects: "Coding Projects",
     gallery: "Gallery",
     galleryTitle: "Gallery",
+    Characters: "Characters",
+    "No images available": "No images available",
   },
   no: {
     github: "Min GitHub",
@@ -77,6 +79,8 @@ const translations: Record<Locale, TranslationMap> = {
     norwegian: "Norsk",
     galleryTitle: "Galleri",
     characterDescriptionZeiko: "Dette er Zeiko",
+    Characters: "Karakterer",
+    "No images available": "Ingen bilder tilgjengelig",
   },
 };
 

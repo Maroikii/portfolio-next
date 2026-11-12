@@ -48,7 +48,7 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <nav ref={navRef} className="border-1 border-gray-300relative mt-3 flex w-full items-center justify-between lg:mt-6 lg:justify-center">
+    <nav ref={navRef} className="mt-3 flex w-full items-center justify-between lg:mt-6 lg:justify-center">
       <img
         className="h-[50px] w-[50px] lg:absolute lg:left-4 lg:block"
         src="/watermark.png"
