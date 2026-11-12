@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import type { MutableRefObject } from "react";
 import Link from "next/link";
 import { useLanguage } from "./Language";
 import { usePathname } from "next/navigation";
@@ -9,6 +10,9 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { locale, setLocale, t } = useLanguage();
   const pathname = usePathname();
+  const menuRef = useRef<HTMLUListElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   const handleLinkClick = () => {
     setIsOpen(false);
@@ -18,8 +22,33 @@ export default function Navbar() {
     setLocale(e.target.value === "en" ? "en" : "no");
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      const target = event.target;
+
+      if (!(target instanceof Node)) {
+        return;
+      }
+
+      const clickedMenu = menuRef.current?.contains(target);
+      const clickedToggle = toggleRef.current?.contains(target);
+
+      if (!clickedMenu && !clickedToggle) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside, { passive: true });
+
+    return () => {
+      document.removeEventListener("pointerdown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [pathname]);
+
   return (
-    <nav className="relative mt-3 flex w-full items-center justify-between lg:mt-6 lg:justify-center">
+    <nav ref={navRef} className="border-1 border-gray-300relative mt-3 flex w-full items-center justify-between lg:mt-6 lg:justify-center">
       <img
         className="h-[50px] w-[50px] lg:absolute lg:left-4 lg:block"
         src="/watermark.png"
@@ -27,6 +56,7 @@ export default function Navbar() {
       />
 
       <ul
+        ref={menuRef}
         className={`${
           isOpen ? "flex" : "hidden"
         } absolute right-0 top-14 z-50 w-auto flex-col items-end gap-3 rounded-xl
@@ -83,7 +113,7 @@ export default function Navbar() {
       </ul>
 
       <div className="flex items-center gap-4 lg:hidden">
-        <button className="text-4xl mr-4" onClick={() => setIsOpen(!isOpen)}>
+        <button ref={toggleRef} className="text-4xl mr-4" onClick={() => setIsOpen(!isOpen)}>
           =
         </button>
       </div>
