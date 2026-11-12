@@ -27,7 +27,10 @@ export default function Navbar() {
       <ul
         className={`${
           isOpen ? "flex" : "hidden"
-        } absolute right-0 top-14 z-50 w-auto flex-col items-end gap-3 rounded-xl bg-secondary/90 px-4 py-3 text-right shadow-md backdrop-blur-sm lg:static lg:flex lg:w-auto lg:flex-row lg:items-center lg:gap-4 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none`}
+        } absolute right-0 top-14 z-50 w-auto flex-col items-end gap-3 rounded-xl
+         bg-secondary/90 px-4 py-3 text-right shadow-xl backdrop-blur-sm 
+         lg:static lg:flex lg:w-auto lg:flex-row lg:items-center lg:gap-4 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none
+         mr-1`}
       >
         <li className="hover:underline hover:text-blue-500">
           <Link href="/" onClick={handleLinkClick}>
@@ -78,7 +81,7 @@ export default function Navbar() {
       </ul>
 
       <div className="flex items-center gap-4 lg:hidden">
-        <button className="text-4xl" onClick={() => setIsOpen(!isOpen)}>
+        <button className="text-4xl mr-4" onClick={() => setIsOpen(!isOpen)}>
           =
         </button>
       </div>
