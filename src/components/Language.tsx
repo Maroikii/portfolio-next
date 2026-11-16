@@ -49,7 +49,11 @@ const translations: Record<Locale, TranslationMap> = {
     codeProjects: "Coding Projects",
     gallery: "Gallery",
     galleryTitle: "Gallery",
+    introTitle: "Introduction",
+    introDescription: "Welcome to the gallery page. Here you can browse through our collection of images and projects.",
+    goToShowroom: "Click here to see more",
     Characters: "Characters",
+    CharacterList: "My Characters",
     "No images available": "No images available",
   },
   no: {
@@ -80,6 +84,10 @@ const translations: Record<Locale, TranslationMap> = {
     galleryTitle: "Galleri",
     characterDescriptionZeiko: "Dette er Zeiko",
     Characters: "Karakterer",
+    introTitle: "Introduksjon",
+    introDescription: "Velkommen til gallerisiden. Her kan du bla gjennom vår samling av bilder og prosjekter.",
+    goToShowroom: "Klikk her for å se mer",
+    CharacterList: "Mine karakterer",
     "No images available": "Ingen bilder tilgjengelig",
   },
 };
