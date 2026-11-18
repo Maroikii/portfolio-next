@@ -1,82 +1,66 @@
-﻿import CharacterGallery from "@/components/CharacterGallery";
+﻿"use client";
 
-const API = "https://www.deviantart.com/api/v1/oauth2";
-const USERNAME = "maroikii";
+import Link from "next/link";
+import { useLanguage } from "@/components/Language";
+import { useImages } from "@/assets/images";
+import { imageConfigDefault } from "next/dist/shared/lib/image-config";
+import Image from "next/image";
 
-const descriptions: Record<string, string> = {
-  Kiyomi: "",
-  Kikou: "",
-  Zeiko: "",
-  Kirin: "",
-  Rioko: "",
-  Zophiel: "",
-};
+export default function GalleryPage() {
+  const { t } = useLanguage();
 
-type Folder = { folderid: string; name: string };
-type Deviation = {
-  deviationid: string;
-  title: string;
-  content?: { src: string };
-};
+  const characters = [
+    { id: "kiyomi", name: "Kiyomi", image: useImages.transparentKiyomi, description: t("shortCharacterDescriptionKiyomi") },
+    { id: "zeiko", name: "Zeiko", image: useImages.transparentZeiko, description: t("shortCharacterDescriptionZeiko") },
+    { id: "kikou", name: "Kikou", image: useImages.transparentKikou, description: t("shortCharacterDescriptionKikou") },
+    { id: "rioko", name: "Rioko", image: useImages.transparentRioko, description: t("shortCharacterDescriptionRioko") },
+    { id: "kirin", name: "Kirin", image: useImages.transparentKirin, description: t("shortCharacterDescriptionKirin") },
+    { id: "zophiel", name: "Zophiel", image: useImages.transparentZophiel, description: t("shortCharacterDescriptionZophiel") }
 
-type GalleryData = {
-  folderid: string;
-  name: string;
-  images: Array<{ deviationid: string; title: string; content?: { src: string } }>;
-};
+  ];
 
-async function getToken() {
-  const res = await fetch("https://www.deviantart.com/oauth2/token", {
-    method: "POST",
-    body: new URLSearchParams({
-      grant_type: "client_credentials",
-      client_id: process.env.DEVIANTART_CLIENT_ID ?? "",
-      client_secret: process.env.DEVIANTART_CLIENT_SECRET ?? "",
-    }),
-    cache: "no-store",
-  });
+ return (
+    <div className="p-6 flex flex-col items-center">
+      <h1 className="text-3xl font-bold mb-4">{t("introTitle")}</h1>
+      <p className="mb-4">{t("introDescription")}</p>
 
-  const data = await res.json();
-  return data.access_token as string;
-}
+      <div className="mt-4">
+        <Link href="/prosjekter/showroom">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all">
+            {t("goToShowroom")}
+          </button>
+        </Link>
+      </div>
 
-async function getJson<T>(path: string, token: string): Promise<T> {
-  const res = await fetch(`${API}${path}`, {
-    headers: { Authorization: `Bearer ${token}` },
-    next: { revalidate: 3600 },
-  });
+      <h2 className="mt-10 text-2xl font-bold mb-6">{t("CharacterList")}</h2>
 
-  return res.json() as Promise<T>;
-}
+      {/* Character Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl ">
+        {characters.map((character) => (
+          <div key={character.id} className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+            {/* Thumbnail */}
+            <Image
+              src={character.image}
+              alt={character.name}
+              className="w-full h-120 object-cover bg-secondary/30"
 
-export default async function GalleryPage() {
-  const token = await getToken();
-
-  const folderResponse = await getJson<{ results?: Folder[] }>(
-    `/gallery/folders?username=${USERNAME}&limit=50`,
-    token,
+            />
+            
+            {/* Character Info */}
+            <div className="p-4 bg-secondary">
+              <h3 className="text-xl font-bold mb-2">{character.name}</h3>
+              <p className="text-gray-600 text-sm mb-4">{character.description}</p>
+              
+              {/* Link to character gallery */}
+              <Link href={`/prosjekter/gallery/${character.id}`}>
+                <button className="w-full bg-text text-white px-4 py-2 rounded hover:bg-blue-600 transition-all">
+                  {t("viewGallery")}
+                </button>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
-
-  const folders = (folderResponse.results ?? []).filter(
-    (folder: Folder) => folder.name in descriptions,
-  );
-
-  const folderData: GalleryData[] = await Promise.all(
-    folders.map(async (folder: Folder) => {
-      const data = await getJson<{ results?: Deviation[] }>(
-        `/gallery/${folder.folderid}?username=${USERNAME}&limit=24`,
-        token,
-      );
-
-      const images = (data.results ?? []).filter((img: Deviation) => Boolean(img.content?.src));
-
-      return {
-        folderid: folder.folderid,
-        name: folder.name,
-        images,
-      };
-    }),
-  );
-
-  return <CharacterGallery folderData={folderData} />;
 }
