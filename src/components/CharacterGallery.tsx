@@ -117,18 +117,21 @@ export default function CharacterGallery({ folderData = [] }: CharacterGalleryPr
             <p className="text-sm text-slate-500">{t("No images available")}</p>
           ) : (
             safeFolderData.map((folder) => (
-              <button
+              <a
                 key={folder.folderid}
-                type="button"
-                onClick={() => handleCharacterSelect(folder.name)}
-                className={`w-full px-4 py-2 text-left transition-colors ${
+                href={`/prosjekter/showroom/${folder.name.toLowerCase()}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleCharacterSelect(folder.name);
+                }}
+                className={`block w-full px-4 py-2 text-left transition-colors cursor-pointer ${
                   selectedCharacter === folder.name
                     ? "bg-primary/50 text-text font-bold"
                     : "hover:bg-primary/20 hover:text-primary"
                 }`}
               >
                 {folder.name}
-              </button>
+              </a>
             ))
           )}
         </nav>
