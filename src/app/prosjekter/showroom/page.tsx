@@ -4,6 +4,7 @@ const API = "https://www.deviantart.com/api/v1/oauth2";
 const USERNAME = "maroikii";
 
 const descriptions: Record<string, string> = {
+  Empty: "",
   Kiyomi: "",
   Kikou: "",
   Zeiko: "",

@@ -5,6 +5,7 @@ import { useLanguage } from "@/components/Language";
 import { useImages } from "@/assets/images";
 import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 import Image from "next/image";
+import CharacterGallery from "@/components/CharacterGallery";
 
 export default function GalleryPage() {
   const { t } = useLanguage();
@@ -55,12 +56,14 @@ export default function GalleryPage() {
             <h3 className="text-xl font-bold mb-2">{character.name}</h3>
             <p className="text-gray-600 text-sm mb-4">{character.description}</p>
 
-            <Link href={`/prosjekter/gallery/${character.id}`}>
+            <Link href={`/prosjekter/showroom/${character.id}`}>
               <button className="w-full bg-text text-white px-4 py-2 rounded hover:bg-blue-600 transition-all">
                 {t("viewGallery")}
-                
+
               </button>
             </Link>
+
+            <CharacterGallery/>
           </div>
         </div>  
       ))}
