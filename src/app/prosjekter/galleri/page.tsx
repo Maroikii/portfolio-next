@@ -62,8 +62,6 @@ export default function GalleryPage() {
 
               </button>
             </Link>
-
-            <CharacterGallery/>
           </div>
         </div>  
       ))}
