@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "@/components/Language";
 import type { GalleryData } from "@/lib/deviantart";
 
@@ -9,9 +9,9 @@ interface CharacterGalleryProps {
 }
 
 export default function CharacterGallery({ folderData = [] }: CharacterGalleryProps) {
-  const safeFolderData = Array.isArray(folderData) ? folderData : [];
+  const safeFolderData = useMemo(() => (Array.isArray(folderData) ? folderData : []), [folderData]);
 
-  const [selectedCharacter, setSelectedCharacter] = useState(safeFolderData[0]?.name ?? "");
+  const [selectedCharacter, setSelectedCharacter] = useState(() => safeFolderData[0]?.name ?? "");
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -19,13 +19,10 @@ export default function CharacterGallery({ folderData = [] }: CharacterGalleryPr
 
   const { t } = useLanguage();
 
-  const selectedFolderData = safeFolderData.find((folder) => folder.name === selectedCharacter);
-
-  useEffect(() => {
-    if (!selectedCharacter && safeFolderData[0]) {
-      setSelectedCharacter(safeFolderData[0].name);
-    }
-  }, [safeFolderData, selectedCharacter]);
+  const selectedFolderData = useMemo(
+    () => safeFolderData.find((folder) => folder.name === selectedCharacter),
+    [safeFolderData, selectedCharacter],
+  );
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -121,8 +118,10 @@ export default function CharacterGallery({ folderData = [] }: CharacterGalleryPr
             {selectedFolderData.images.map((img) => (
               <img
                 key={img.deviationid}
-                src={img.content?.src}
+                src={img.thumb?.src ?? img.content?.src}
                 alt={img.title}
+                loading="lazy"
+                decoding="async"
                 className="max-h-96 w-auto rounded-lg object-contain"
               />
             ))}

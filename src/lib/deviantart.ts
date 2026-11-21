@@ -1,5 +1,6 @@
 const API = "https://www.deviantart.com/api/v1/oauth2";
 const USERNAME = "maroikii";
+const MAX_GALLERY_IMAGES = 12;
 
 export type Folder = { folderid: string; name: string };
 export type Deviation = {
@@ -56,7 +57,7 @@ export async function fetchCharacterGalleries(
   const folderData: GalleryData[] = await Promise.all(
     folders.map(async (folder: Folder) => {
       const data = await getJson<{ results?: Deviation[] }>(
-        `/gallery/${folder.folderid}?username=${USERNAME}&limit=24`,
+        `/gallery/${folder.folderid}?username=${USERNAME}&limit=${MAX_GALLERY_IMAGES}`,
         token,
       );
 
@@ -94,7 +95,7 @@ export async function fetchCharacterGallery(
 
   const folder = folders[0];
   const data = await getJson<{ results?: Deviation[] }>(
-    `/gallery/${folder.folderid}?username=${USERNAME}&limit=24`,
+    `/gallery/${folder.folderid}?username=${USERNAME}&limit=${MAX_GALLERY_IMAGES}`,
     token,
   );
 
