@@ -27,3 +27,4 @@ export default function CharacterNavbar({ characters, selectedCharacter }: Props
     </nav>
   );
 }
+export { CharacterNavbar };

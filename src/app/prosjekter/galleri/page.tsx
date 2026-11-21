@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/components/Language";
 import { images } from "@/assets/images";
+import { CharacterNavbar } from "@/components/CharacterNavbar";
 
 export default function GalleryPage() {
   const { t } = useLanguage();
@@ -18,7 +19,9 @@ export default function GalleryPage() {
   ];
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-4 py-8 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background">
+      <CharacterNavbar characters={characters.map(c => c.name)} selectedCharacter="" />
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-10 max-w-3xl text-center">
         <p className="mb-3 text-l font-semibold uppercase tracking-[0.2em] text-primary">{t("gallery")}</p>
         <p className="mt-4 text-base text-primary/85 sm:text-lg">{t("introDescription")}</p>
@@ -58,6 +61,7 @@ export default function GalleryPage() {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );
