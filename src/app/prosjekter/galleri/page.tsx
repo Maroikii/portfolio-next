@@ -20,9 +20,8 @@ export default function GalleryPage() {
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-10 max-w-3xl text-center">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary/80">{t("Characters")}</p>
-        <h1 className="text-4xl font-black tracking-tight text-text sm:text-5xl">{t("introTitle")}</h1>
-        <p className="mt-4 text-base text-slate-300 sm:text-lg">{t("introDescription")}</p>
+        <p className="mb-3 text-l font-semibold uppercase tracking-[0.2em] text-primary">{t("gallery")}</p>
+        <p className="mt-4 text-base text-primary/85 sm:text-lg">{t("introDescription")}</p>
       </div>
 
       <div className="w-full">
@@ -46,7 +45,7 @@ export default function GalleryPage() {
               <div className="space-y-3 p-4">
                 <div>
                   <h3 className="text-2xl font-bold text-text">{character.name}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300">{character.description}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-primary/85">{character.description}</p>
                 </div>
 
                 <Link
