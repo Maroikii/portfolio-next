@@ -1,16 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useLanguage } from "@/components/Language";
 
-// Shape of a single image returned from the API.
 interface CharacterImage {
   deviationid: string;
   title: string;
   content?: { src: string };
 }
 
-// One gallery folder = one character/collection, with its image list.
 interface CharacterFolder {
   folderid: string;
   name: string;
@@ -19,60 +18,51 @@ interface CharacterFolder {
 
 interface CharacterGalleryProps {
   folderData?: CharacterFolder[];
+  initialCharacter?: string;
 }
 
-export default function CharacterGallery({ folderData = [] }: CharacterGalleryProps) {
-  // Guard against bad data so the component still works if the API response is empty or malformed.
+export default function CharacterGallery({
+  folderData = [],
+  initialCharacter,
+}: CharacterGalleryProps) {
   const safeFolderData = Array.isArray(folderData) ? folderData : [];
+  const [selectedCharacter, setSelectedCharacter] = useState(
+    () => initialCharacter ?? safeFolderData[0]?.name ?? "",
+  );
+  const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
+    if (typeof window === "undefined") {
+      return true;
+    }
 
-  // Tracks which character folder is currently selected in the sidebar.
-  const [selectedCharacter, setSelectedCharacter] = useState(safeFolderData[0]?.name ?? "");
-
-  // Mobile sidebar toggle: whether the left menu is open or hidden.
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
-  // Ref for detecting clicks outside the sidebar on mobile.
+    return window.innerWidth >= 1024;
+  });
   const sidebarRef = useRef<HTMLDivElement>(null);
-
-  // Translation helper for labels like "Characters" and "No images available".
+  const router = useRouter();
   const { t } = useLanguage();
 
-  // Find the currently selected folder so we can show its images.
   const selectedFolderData = safeFolderData.find((folder) => folder.name === selectedCharacter);
 
-  // If no character is selected yet, default to the first folder when the data arrives.
   useEffect(() => {
-    if (!selectedCharacter && safeFolderData[0]) {
-      setSelectedCharacter(safeFolderData[0].name);
+    if (initialCharacter && initialCharacter !== selectedCharacter) {
+      setSelectedCharacter(initialCharacter);
     }
-  }, [safeFolderData, selectedCharacter]);
+  }, [initialCharacter]);
 
-  // Close the sidebar when the user clicks outside it.
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
-        setIsSidebarOpen(false);
-      }
-    };
-
-    if (isSidebarOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      setIsSidebarOpen(false);
     }
+  }, [initialCharacter]);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isSidebarOpen]);
-
-  // When a user clicks a character in the sidebar, show that character's gallery.
   const handleCharacterSelect = (characterName: string) => {
+    const targetSlug = characterName.toLowerCase();
     setSelectedCharacter(characterName);
     setIsSidebarOpen(false);
+    router.push(`/prosjekter/galleri/${targetSlug}`);
   };
 
   return (
     <div className="flex min-h-screen gap-4">
-      {/* Mobile menu button: opens/closes the left sidebar on small screens. */}
       <button
         type="button"
         onClick={() => setIsSidebarOpen((current) => !current)}
@@ -101,7 +91,6 @@ export default function CharacterGallery({ folderData = [] }: CharacterGalleryPr
         />
       </button>
 
-      {/* Sidebar: left column listing all character folders. */}
       <aside
         ref={sidebarRef}
         className={`fixed mt-20 lg:mt-10 lg:static rounded top-0 left-0 w-52 max-w-xs
@@ -117,13 +106,10 @@ export default function CharacterGallery({ folderData = [] }: CharacterGalleryPr
             <p className="text-sm text-slate-500">{t("No images available")}</p>
           ) : (
             safeFolderData.map((folder) => (
-              <a
+              <button
                 key={folder.folderid}
-                href={`/prosjekter/showroom/${folder.name.toLowerCase()}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCharacterSelect(folder.name);
-                }}
+                type="button"
+                onClick={() => handleCharacterSelect(folder.name)}
                 className={`block w-full px-4 py-2 text-left transition-colors cursor-pointer ${
                   selectedCharacter === folder.name
                     ? "bg-primary/50 text-text font-bold"
@@ -131,13 +117,12 @@ export default function CharacterGallery({ folderData = [] }: CharacterGalleryPr
                 }`}
               >
                 {folder.name}
-              </a>
+              </button>
             ))
           )}
         </nav>
       </aside>
 
-      {/* Main content: shows the selected character gallery. */}
       <main className="flex-1 p-6 w-full lg:w-auto ml-2">
         <h1 className="text-3xl font-bold mb-6 justify-center flex">{selectedCharacter || t("Characters")}</h1>
 
@@ -157,10 +142,9 @@ export default function CharacterGallery({ folderData = [] }: CharacterGalleryPr
         )}
       </main>
 
-      {/* Overlay used only on mobile to close the sidebar when tapping outside. */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 z-30 md:hidden backdrop-blur-[1px]"
+          className="fixed inset-0 z-30 lg:hidden backdrop-blur-[1px]"
           onClick={() => setIsSidebarOpen(false)}
           aria-hidden="true"
         />
