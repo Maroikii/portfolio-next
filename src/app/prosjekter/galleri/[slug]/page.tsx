@@ -1,5 +1,5 @@
 import CharacterGallery from "@/components/CharacterGallery";
-import fetchCharacterGallery  from "@/lib/fetchCharacterGalleries";
+import { fetchCharacterGalleries } from "@/lib/fetchCharacterGalleries";
 
 const descriptions = {
   Kiyomi: "",
@@ -17,7 +17,11 @@ export default async function CharacterPage({
 }) {
   const { slug } = await params;
 
-  const folderData = await fetchCharacterGallery(slug, descriptions);
+  const folderData = await fetchCharacterGalleries(descriptions);
+  const selectedCharacter =
+    folderData.find((folder) => folder.name.toLowerCase() === slug.toLowerCase())?.name ??
+    folderData[0]?.name ??
+    "";
 
-  return <CharacterGallery folderData={folderData ? [folderData] : []} />;
+  return <CharacterGallery folderData={folderData} initialCharacter={selectedCharacter} />;
 }

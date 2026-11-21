@@ -5,11 +5,11 @@ import transparentRioko from "./transparent-rioko.png";
 import transparentKirin from "./transparent-kirin.png";
 import transparentZophiel from "./transparent-zophiel.png";
 
-export const useImages = {
+export const images = {
   transparentKiyomi,
   transparentZeiko,
   transparentKikou,
   transparentRioko,
   transparentKirin,
-  transparentZophiel
+  transparentZophiel,
 };
