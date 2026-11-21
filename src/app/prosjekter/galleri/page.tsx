@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/components/Language";
 import { images } from "@/assets/images";
-import { CharacterNavbar } from "@/components/CharacterNavbar";
+import CharacterNavbar from "@/components/CharacterNavbar";
 
 export default function GalleryPage() {
   const { t } = useLanguage();
