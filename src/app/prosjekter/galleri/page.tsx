@@ -25,15 +25,6 @@ export default function GalleryPage() {
         <p className="mt-4 text-base text-slate-300 sm:text-lg">{t("introDescription")}</p>
       </div>
 
-      <div className="mb-8 flex justify-center">
-        <Link
-          href={`/prosjekter/galleri/${characters[0].id}`}
-          className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-primary/90"
-        >
-          {t("goToCharacterGallery")}
-        </Link>
-      </div>
-
       <div className="w-full">
         <h2 className="mb-6 text-2xl font-bold text-text">{t("CharacterList")}</h2>
 
