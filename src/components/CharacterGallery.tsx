@@ -33,8 +33,6 @@ export default function CharacterGallery({ folderData = [] }: CharacterGalleryPr
 
   // Ref for detecting clicks outside the sidebar on mobile.
   const sidebarRef = useRef<HTMLDivElement>(null);
-
-  // Translation helper for labels like "Characters" and "No images available".
   const { t } = useLanguage();
 
   // Find the currently selected folder so we can show its images.
