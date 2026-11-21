@@ -3,14 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/components/Language";
 
-// Shape of a single image returned from the API.
 interface CharacterImage {
   deviationid: string;
   title: string;
   content?: { src: string };
 }
 
-// One gallery folder = one character/collection, with its image list.
 interface CharacterFolder {
   folderid: string;
   name: string;
@@ -22,30 +20,20 @@ interface CharacterGalleryProps {
 }
 
 export default function CharacterGallery({ folderData = [] }: CharacterGalleryProps) {
-  // Guard against bad data so the component still works if the API response is empty or malformed.
   const safeFolderData = Array.isArray(folderData) ? folderData : [];
-
-  // Tracks which character folder is currently selected in the sidebar.
   const [selectedCharacter, setSelectedCharacter] = useState(safeFolderData[0]?.name ?? "");
-
-  // Mobile sidebar toggle: whether the left menu is open or hidden.
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
-  // Ref for detecting clicks outside the sidebar on mobile.
   const sidebarRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
-  // Find the currently selected folder so we can show its images.
   const selectedFolderData = safeFolderData.find((folder) => folder.name === selectedCharacter);
 
-  // If no character is selected yet, default to the first folder when the data arrives.
   useEffect(() => {
     if (!selectedCharacter && safeFolderData[0]) {
       setSelectedCharacter(safeFolderData[0].name);
     }
   }, [safeFolderData, selectedCharacter]);
 
-  // Close the sidebar when the user clicks outside it.
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
@@ -117,7 +105,7 @@ export default function CharacterGallery({ folderData = [] }: CharacterGalleryPr
             safeFolderData.map((folder) => (
               <a
                 key={folder.folderid}
-                href={`/prosjekter/showroom/${folder.name.toLowerCase()}`}
+                href={`/prosjekter/galleri/${folder.name.toLowerCase()}`}
                 onClick={(e) => {
                   e.preventDefault();
                   handleCharacterSelect(folder.name);

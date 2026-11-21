@@ -26,9 +26,9 @@ export default function GalleryPage() {
       <p className="mb-4">{t("introDescription")}</p>
 
       <div className="mt-4">
-        <Link href="/prosjekter/showroom">
+        <Link href={`/prosjekter/galleri/${characters[0].id}`}>
           <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all">
-            {t("goToShowroom")}
+            {t("goToCharacterGallery")}
           </button>
         </Link>
       </div>
@@ -56,7 +56,7 @@ export default function GalleryPage() {
             <h3 className="text-xl font-bold mb-2">{character.name}</h3>
             <p className="text-gray-600 text-sm mb-4">{character.description}</p>
 
-            <Link href={`/prosjekter/showroom/${character.id}`}>
+            <Link href={`/prosjekter/galleri/${character.id}`}>
               <button className="w-full bg-text text-white px-4 py-2 rounded hover:bg-blue-600 transition-all">
                 {t("viewGallery")}
 
