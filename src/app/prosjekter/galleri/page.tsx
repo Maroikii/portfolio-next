@@ -43,7 +43,7 @@ export default function GalleryPage() {
               src={character.image}
               alt={character.name}
               className="
-                w-full h-130 object-cover object-bottom bg-primary
+                w-full h-130 object-cover object-bottom
                 transition-all duration-300 ease-in-out
                 group-hover:scale-105
                 group-hover:drop-shadow-[0_18px_18px_rgba(0,0,0,0.35)]
