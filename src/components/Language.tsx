@@ -118,6 +118,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const storedLocale = getStoredLocale();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocaleState(storedLocale);
     setIsReady(true);
   }, []);

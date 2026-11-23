@@ -2,7 +2,7 @@
 import { images } from '@/assets/images';
 import { useLanguage } from '@/components/Language';
 
-export function getCharacters() {
+export function useCharacters() {
   const { t } = useLanguage();
 
   return [
@@ -14,3 +14,6 @@ export function getCharacters() {
     { id: "zophiel", name: "Zophiel", image: images.transparentZophiel, description: t("shortCharacterDescriptionZophiel") },
   ];
 }
+
+// Backwards-compatible alias (not a hook by name; prefer useCharacters in components).
+export const getCharacters = useCharacters;
