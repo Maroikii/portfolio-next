@@ -49,7 +49,16 @@ const translations: Record<Locale, TranslationMap> = {
     codeProjects: "Coding Projects",
     gallery: "Gallery",
     galleryTitle: "Gallery",
+    introDescription: "Welcome to the gallery page. Here you can browse through my collection of originally created characters.",
     Characters: "Characters",
+    CharacterList: "My Characters",
+    shortCharacterDescriptionZeiko: "This is Zeiko",
+    shortCharacterDescriptionKiyomi: "This is Kiyomi",
+    shortCharacterDescriptionZophiel: "This is Zophiel",
+    shortCharacterDescriptionKirin: "This is Kirin",
+    shortCharacterDescriptionRioko: "This is Rioko",
+    shortCharacterDescriptionKikou: "This is Kikou",
+    viewGallery: "View Gallery",
     "No images available": "No images available",
   },
   no: {
@@ -78,8 +87,16 @@ const translations: Record<Locale, TranslationMap> = {
     gallery: "Galleri",
     norwegian: "Norsk",
     galleryTitle: "Galleri",
-    characterDescriptionZeiko: "Dette er Zeiko",
     Characters: "Karakterer",
+    introDescription: "Velkommen til gallerisiden. Her kan du bla gjennom min samling av originale karakterer.",
+    CharacterList: "Mine karakterer",
+    shortCharacterDescriptionKiyomi: "Dette er Kiyomi",
+    shortCharacterDescriptionZophiel: "Dette er Zophiel",
+    shortCharacterDescriptionKirin: "Dette er Kirin",
+    shortCharacterDescriptionRioko: "Dette er Rioko",
+    shortCharacterDescriptionKikou: "Dette er Kikou",
+    shortCharacterDescriptionZeiko: "Dette er Zeiko",
+    viewGallery: "Se galleri",
     "No images available": "Ingen bilder tilgjengelig",
   },
 };
@@ -101,6 +118,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const storedLocale = getStoredLocale();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocaleState(storedLocale);
     setIsReady(true);
   }, []);

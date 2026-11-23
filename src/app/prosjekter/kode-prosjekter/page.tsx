@@ -2,7 +2,7 @@
  
 import React from 'react';
 import { useLanguage } from "@/components/Language";
-import { kodeprosjekter } from "@/assets/imageLoader";
+import { kodeprosjekter } from "@/components/KodeLoader";
 
 export default function Galleri() {
   const { t } = useLanguage();

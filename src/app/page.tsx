@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import Zeiko from "../assets/zeiko.jpg";
+import Link from "next/link";
 import Profileimg from "../components/Profile-img";
 import { useLanguage } from "../components/Language";
+import { useCharacters } from "../lib/characters";
 
 export default function Page() {
   const { t } = useLanguage();
+  const characters = useCharacters();
 
   return (
     <main className="bg-background text-text">
@@ -22,7 +24,24 @@ export default function Page() {
 
       <section className="pb-6">
         <h2 className="text-3xl font-semibold text-primary">{t("myDrawings")}</h2>
-        <div className="mt-4 flex flex-wrap gap-6"></div>
+        <div className="mt-4 flex flex-wrap gap-6">
+          {characters.map((character) => (
+            <Link
+              key={character.id}
+              href={`/prosjekter/galleri/${encodeURIComponent(character.id)}`}
+              className="block"
+            >
+              <Image
+                src={character.image}
+                alt={character.name}
+                width={300}
+                height={400}
+                sizes="(max-width: 800px) 100vw, 300px"
+                className="h-auto w-75 rounded-lg object-cover"
+              />
+            </Link>
+          ))}
+        </div>
       </section>
 
       <div className="pb-6">

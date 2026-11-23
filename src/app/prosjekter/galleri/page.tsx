@@ -1,82 +1,42 @@
-﻿import CharacterGallery from "@/components/CharacterGallery";
+﻿'use client';
 
-const API = "https://www.deviantart.com/api/v1/oauth2";
-const USERNAME = "maroikii";
+import Link from 'next/link';
+import { useCharacters } from '@/lib/characters';
 
-const descriptions: Record<string, string> = {
-  Kiyomi: "",
-  Kikou: "",
-  Zeiko: "",
-  Kirin: "",
-  Rioko: "",
-  Zophiel: "",
-};
+export function CharacterGrid() {
+  const characters = useCharacters();
 
-type Folder = { folderid: string; name: string };
-type Deviation = {
-  deviationid: string;
-  title: string;
-  content?: { src: string };
-};
-
-type GalleryData = {
-  folderid: string;
-  name: string;
-  images: Array<{ deviationid: string; title: string; content?: { src: string } }>;
-};
-
-async function getToken() {
-  const res = await fetch("https://www.deviantart.com/oauth2/token", {
-    method: "POST",
-    body: new URLSearchParams({
-      grant_type: "client_credentials",
-      client_id: process.env.DEVIANTART_CLIENT_ID ?? "",
-      client_secret: process.env.DEVIANTART_CLIENT_SECRET ?? "",
-    }),
-    cache: "no-store",
-  });
-
-  const data = await res.json();
-  return data.access_token as string;
+  return (
+    <section className='mb-16'>
+      <h2 className='mb-6 text-2xl font-bold'>Møt karakterene</h2>
+      <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+        {characters.map((character) => (
+          <Link
+            key={character.id}
+            href={`/prosjekter/galleri/${character.id}`}
+            className='group overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-lg'
+          >
+            <div className='aspect-square overflow-hidden bg-primary-soft flex items-center justify-center'>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={character.image.src}
+                alt={character.name}
+                className='h-full w-full object-contain p-4 transition duration-500 group-hover:scale-105'
+              />
+            </div>
+            <div className='p-5'>
+              <h3 className='mb-1 text-xl font-semibold'>{character.name}</h3>
+              <p className='text-sm text-muted line-clamp-2'>
+                {character.description}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
 }
 
-async function getJson<T>(path: string, token: string): Promise<T> {
-  const res = await fetch(`${API}${path}`, {
-    headers: { Authorization: `Bearer ${token}` },
-    next: { revalidate: 3600 },
-  });
-
-  return res.json() as Promise<T>;
-}
-
-export default async function GalleryPage() {
-  const token = await getToken();
-
-  const folderResponse = await getJson<{ results?: Folder[] }>(
-    `/gallery/folders?username=${USERNAME}&limit=50`,
-    token,
-  );
-
-  const folders = (folderResponse.results ?? []).filter(
-    (folder: Folder) => folder.name in descriptions,
-  );
-
-  const folderData: GalleryData[] = await Promise.all(
-    folders.map(async (folder: Folder) => {
-      const data = await getJson<{ results?: Deviation[] }>(
-        `/gallery/${folder.folderid}?username=${USERNAME}&limit=24`,
-        token,
-      );
-
-      const images = (data.results ?? []).filter((img: Deviation) => Boolean(img.content?.src));
-
-      return {
-        folderid: folder.folderid,
-        name: folder.name,
-        images,
-      };
-    }),
-  );
-
-  return <CharacterGallery folderData={folderData} />;
+export default function Page() {
+  return <CharacterGrid />;
 }
