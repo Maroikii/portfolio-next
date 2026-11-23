@@ -49,9 +49,7 @@ const translations: Record<Locale, TranslationMap> = {
     codeProjects: "Coding Projects",
     gallery: "Gallery",
     galleryTitle: "Gallery",
-    introTitle: "Introduction",
-    introDescription: "Welcome to the gallery page. Here you can browse through my collection of images.",
-    goToShowroom: "Click here to see more",
+    introDescription: "Welcome to the gallery page. Here you can browse through my collection of originally created characters.",
     Characters: "Characters",
     CharacterList: "My Characters",
     shortCharacterDescriptionZeiko: "This is Zeiko",
@@ -90,9 +88,7 @@ const translations: Record<Locale, TranslationMap> = {
     norwegian: "Norsk",
     galleryTitle: "Galleri",
     Characters: "Karakterer",
-    introTitle: "Introduksjon",
-    introDescription: "Velkommen til gallerisiden. Her kan du bla gjennom min samling av bilder.",
-    goToShowroom: "Klikk her for å se mer",
+    introDescription: "Velkommen til gallerisiden. Her kan du bla gjennom min samling av originale karakterer.",
     CharacterList: "Mine karakterer",
     shortCharacterDescriptionKiyomi: "Dette er Kiyomi",
     shortCharacterDescriptionZophiel: "Dette er Zophiel",
@@ -122,6 +118,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const storedLocale = getStoredLocale();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocaleState(storedLocale);
     setIsReady(true);
   }, []);
