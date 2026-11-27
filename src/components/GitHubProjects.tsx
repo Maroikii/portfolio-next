@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLanguage } from "./Language";
 import ProjectCard from "./ProjectCard";
 
 interface GitHubProject {
@@ -11,9 +12,10 @@ interface GitHubProject {
 }
 
 const username = "Maroikii"
-const selectedProjects = ["csharp-Pong", "frog-game", "cafe-rush", "portfolio-next"]
+const selectedProjects = ["portfolio-next", "frog-game"]
 
 export default function GitHubProjects() {
+    const { t } = useLanguage();
     const [projects, setProjects] = useState<GitHubProject[]>([]);
 
     useEffect(() => {
@@ -35,4 +37,19 @@ export default function GitHubProjects() {
         }
         fetchProjects();
     }, []);
+    return (
+        <section className="my-12">
+            <h2>{t("githubProjectsTitle")}</h2>
+            <div className="flex flex-row flex-wrap gap-6 max-w-4xl">
+                {projects.map((project) => (
+                    <ProjectCard
+                        key={project.id}
+                        name={project.name}
+                        description={project.description}
+                        url={project.html_url}
+                    />
+                ))}
+            </div>
+        </section>
+    )
 }
