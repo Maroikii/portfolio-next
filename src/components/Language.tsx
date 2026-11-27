@@ -30,7 +30,7 @@ const translations: Record<Locale, TranslationMap> = {
     footer: "Maroikii",
     welcomeTitle: "Welcome to My Portfolio",
     welcomeText:
-      "Hello, welcome to my portfolio website! Here you will find information about my projects, skills, and experience.",
+      "Hello, welcome to my portfolio website! Here you will find information about my projects, drawings, skills, and experience.",
     aboutMe: "About Me",
     aboutMeText: "I am a digital artist and a coder",
     aboutMeAdditionalText: "I also enjoy creating digital art and exploring new technologies.",
@@ -49,9 +49,7 @@ const translations: Record<Locale, TranslationMap> = {
     codeProjects: "Coding Projects",
     gallery: "Gallery",
     galleryTitle: "Gallery",
-    introTitle: "Introduction",
-    introDescription: "Welcome to the gallery page. Here you can browse through my collection of images.",
-    goToShowroom: "Click here to see more",
+    introDescription: "Welcome to the gallery page. Here you can browse through my collection of originally created characters.",
     Characters: "Characters",
     CharacterList: "My Characters",
     shortCharacterDescriptionZeiko: "This is Zeiko",
@@ -61,6 +59,8 @@ const translations: Record<Locale, TranslationMap> = {
     shortCharacterDescriptionRioko: "This is Rioko",
     shortCharacterDescriptionKikou: "This is Kikou",
     viewGallery: "View Gallery",
+    goToGallery: "Go to Gallery",
+    goToCodingProjects: "Go to Coding Projects",
     "No images available": "No images available",
   },
   no: {
@@ -72,7 +72,7 @@ const translations: Record<Locale, TranslationMap> = {
     footer: "Maroikii",
     welcomeTitle: "Velkommen til min portefølje",
     welcomeText:
-      "Hei, velkommen til min portefølje! Her finner du informasjon om mine prosjekter, ferdigheter og erfaring.",
+      "Hei, velkommen til min portefølje! Her finner du informasjon om mine prosjekter, tegninger, ferdigheter og erfaring.",
     aboutMe: "Om meg",
     aboutMeText: "Jeg er en digital artist og utvikler",
     aboutMeAdditionalText: "Jeg liker også å lage digital kunst og utforske ny teknologi.",
@@ -90,9 +90,7 @@ const translations: Record<Locale, TranslationMap> = {
     norwegian: "Norsk",
     galleryTitle: "Galleri",
     Characters: "Karakterer",
-    introTitle: "Introduksjon",
-    introDescription: "Velkommen til gallerisiden. Her kan du bla gjennom min samling av bilder.",
-    goToShowroom: "Klikk her for å se mer",
+    introDescription: "Velkommen til gallerisiden. Her kan du bla gjennom min samling av originale karakterer.",
     CharacterList: "Mine karakterer",
     shortCharacterDescriptionKiyomi: "Dette er Kiyomi",
     shortCharacterDescriptionZophiel: "Dette er Zophiel",
@@ -101,6 +99,8 @@ const translations: Record<Locale, TranslationMap> = {
     shortCharacterDescriptionKikou: "Dette er Kikou",
     shortCharacterDescriptionZeiko: "Dette er Zeiko",
     viewGallery: "Se galleri",
+    goToGallery: "Gå til galleri",
+    goToCodingProjects: "Gå til kode-prosjekter",
     "No images available": "Ingen bilder tilgjengelig",
   },
 };
@@ -122,6 +122,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const storedLocale = getStoredLocale();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocaleState(storedLocale);
     setIsReady(true);
   }, []);
