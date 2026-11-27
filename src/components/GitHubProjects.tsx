@@ -38,8 +38,7 @@ export default function GitHubProjects() {
         fetchProjects();
     }, []);
     return (
-        <section className="my-12">
-            <h2>{t("githubProjectsTitle")}</h2>
+        <section className="my-12 items-center text-center flex flex-col">
             <div className="flex flex-row flex-wrap gap-6 max-w-4xl">
                 {projects.map((project) => (
                     <ProjectCard
